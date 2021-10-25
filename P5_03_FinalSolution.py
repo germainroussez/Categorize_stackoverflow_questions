@@ -16,7 +16,7 @@ app = Flask(__name__)
 multilabel_binarizer = pickle.load(open('Saves/multilabel_binarizer.pkl', 'rb'))
 cc_classifier = pickle.load(open('Saves/cc_classifier.pkl', 'rb'))
 vectorizer = pickle.load(open('Saves/custom_vectorizer.pkl', 'rb'))
-en_nlp = spacy.load('en_core_web_trf')
+en_nlp = spacy.load('en_core_web_sm')
 
 def remove_convert_non_letters(text):
     text = re.sub("c\+\+", "cplusplus", text)
