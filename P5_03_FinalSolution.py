@@ -14,7 +14,7 @@ from sklearn.feature_extraction.text import ENGLISH_STOP_WORDS
 app = Flask(__name__)
 
 multilabel_binarizer = pickle.load(open('Saves/multilabel_binarizer.pkl', 'rb'))
-lp_classifier = pickle.load(open('Saves/lp_classifier.pkl', 'rb'))
+cc_classifier = pickle.load(open('Saves/cc_classifier.pkl', 'rb'))
 vectorizer = pickle.load(open('Saves/custom_vectorizer.pkl', 'rb'))
 en_nlp = spacy.load('en_core_web_trf')
 
@@ -50,10 +50,9 @@ def pred(text):
     text_tokenized = custom_tokenizer(only_lowercase_letters)
     text_without_stopwords = remove_stopwords(text_tokenized)
     BOW = custom_vectorizer([text_without_stopwords])
-    lp_prediction = lp_classifier.predict(BOW)
-    lp_prediction_labels = multilabel_binarizer.inverse_transform(lp_prediction)
-    print(lp_prediction_labels)
-    return lp_prediction_labels
+    cc_prediction = cc_classifier.predict(BOW)
+    cc_prediction_labels = multilabel_binarizer.inverse_transform(cc_prediction)
+    return cc_prediction_labels
 
 @app.route('/')
 def home():
